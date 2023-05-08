@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from .views import LoginView, ProfileView
+
 urlpatterns = [
     path("geotest/", include("geodjango_test.urls")),
     path("admin/", admin.site.urls),
+    path("login/", LoginView.as_view()),
+    path("profile/", ProfileView.as_view()),
 ]

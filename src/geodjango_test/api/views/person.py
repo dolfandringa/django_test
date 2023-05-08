@@ -13,10 +13,11 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
     email = serializers.CharField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
+    addresses = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Person
-        fields = ["url", "first_name", "last_name", "email"]
+        fields = ["url", "first_name", "last_name", "email", "addresses"]
 
 
 class PersonFilterSet(PropertyFilterSet):

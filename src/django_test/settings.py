@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -58,6 +59,14 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8080",
+    "http://localhost:8080",
+]
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
 ROOT_URLCONF = "django_test.urls"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -171,4 +180,33 @@ REST_FRAMEWORK = {
         "rest_framework_json_api.renderers.JSONRenderer",
     ),
     "TEST_REQUEST_DEFAULT_FORMAT": "vnd.api+json",
+}
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "NOTSET",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "NOTSET",
+        },
+        "django.request": {
+            "handlers": ["console"],
+            "propagate": False,
+            "level": "ERROR",
+        },
+    },
 }

@@ -13,6 +13,9 @@ class Person(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
     )
 
+    def __str__(self):
+        return f"{self.last_name}, {self.first_name}"
+
     def save(self, *args, **kwargs):
         """Save current and user object."""
         if hasattr(self, "user") and self.user is not None:

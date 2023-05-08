@@ -10,7 +10,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "url", "username", "email", "is_staff"]
+        fields = [
+            "first_name",
+            "last_name",
+            "url",
+            "username",
+            "email",
+            "is_staff",
+        ]
 
 
 class UserViewSet(viewsets.ModelViewSet):

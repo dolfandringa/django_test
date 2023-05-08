@@ -20,6 +20,8 @@ django-crispy-forms = "^2.0"
 crispy-bootstrap4 = "^2022.1"
 djangorestframework-jsonapi = {extras = ["django-filter", "django-polymorphic", "openapi"], version = "^6.0.0"}
 django-property-filter = "^1.1.2"
+django-cors-headers = "^3.14.0"
+pytest-django = "^4.5.2"
 
 [tool.poetry.scripts]
 manage = "manage:main"
