@@ -1,0 +1,66 @@
+[tool.poetry]
+name = "django-test"
+version = "0.1.0"
+description = ""
+authors = ["Dolf Andringa <dolfandringa@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_test", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.7"
+unicorn = "^2.0.1.post1"
+uvicorn = "^0.21.1"
+psycopg2 = "^2.9.5"
+numpy = "^1.24.2"
+pyproj = "^3.4.1"
+geos = "^0.2.3"
+gdal = "3.5.2"
+django-crispy-forms = "^2.0"
+crispy-bootstrap4 = "^2022.1"
+djangorestframework-jsonapi = {extras = ["django-filter", "django-polymorphic", "openapi"], version = "^6.0.0"}
+django-property-filter = "^1.1.2"
+
+[tool.poetry.scripts]
+manage = "manage:main"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.2"
+pylint = "^2.17.1"
+pyright = "^1.1.300"
+black = "^23.1.0"
+pytest-mock = "^3.10.0"
+pytest-pylint = "^0.19.0"
+pytest-cov = "^4.0.0"
+pytest-asyncio = "^0.21.0"
+isort = "^5.12.0"
+flake8 = "^6.0.0"
+mock = "^5.0.1"
+pylint-pydantic = "^0.1.8"
+django-stubs = {extras = ["compatible-mypy"], version = "^4.2.0"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "--pylint",
+    "--cov=march_backend",
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.format]
+max-line-length = "88"
+
+[tool.pylint.main]
+extension-pkg-allow-list=["pydantic"]
+load-plugins=["pylint_pydantic"]
+
+[tool.pylint.exceptions]
+overgeneral-exceptions=["builtins.BaseException", "builtins.Exception"]
+
