@@ -5,11 +5,12 @@ from rest_framework import routers
 from rest_framework.schemas import get_schema_view
 from rest_framework_json_api.schemas.openapi import SchemaGenerator
 
-from .views import PersonViewSet, UserViewSet
+from .views import AddressViewSet, PersonViewSet, UserViewSet
 
 router = routers.DefaultRouter()
 router.register("users", UserViewSet)
 router.register("person", PersonViewSet)
+router.register("address", AddressViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
