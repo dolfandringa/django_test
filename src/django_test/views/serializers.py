@@ -2,13 +2,16 @@
 import logging
 
 from django.contrib.auth import get_user_model
-from rest_framework import serializers
+from rest_framework_json_api import serializers
 
 logger = logging.getLogger(__name__)
 
 
 class LoginSerializer(serializers.Serializer):
     """Login Serializer"""
+
+    class Meta:
+        resource_name = "login"
 
     email = serializers.EmailField(label="Email", write_only=True)
     password = serializers.CharField(
