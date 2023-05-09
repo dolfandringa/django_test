@@ -52,6 +52,7 @@ addopts = [
     "--pylint",
     "--cov=march_backend",
 ]
+DJANGO_SETTINGS_MODULE = "django_test.settings"
 
 [tool.isort]
 profile = "black"
