@@ -49,8 +49,6 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib",
-    "--pylint",
-    "--cov=march_backend",
 ]
 DJANGO_SETTINGS_MODULE = "django_test.settings"
 

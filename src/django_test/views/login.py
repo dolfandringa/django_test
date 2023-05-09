@@ -1,11 +1,9 @@
 """Login View"""
 import logging
 
-from django.contrib.auth import login
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import permissions, status, views
-from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.response import Response
 from rest_framework.serializers import empty
 
@@ -28,14 +26,10 @@ class LoginView(views.APIView):
         serializer = LoginSerializer(
             data=self.request.data, context={"request": self.request}
         )
-        try:
-            serializer.is_valid(raise_exception=True)
-        except ValidationError as exc:
-            raise PermissionDenied("Invalid credentials") from exc
+        serializer.is_valid(raise_exception=True)
         if serializer.validated_data is None or isinstance(
             serializer.validated_data, empty
         ):
             raise PermissionDenied("No validated data.")
         user = serializer.validated_data["user"]
-        login(request, user)
         return Response(None, status=status.HTTP_202_ACCEPTED)
