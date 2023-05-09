@@ -25,7 +25,6 @@ class LoginView(views.APIView):
 
     def post(self, request):
         """Login POST"""
-        print(f"Got post request{request.data}")
         serializer = LoginSerializer(
             data=self.request.data, context={"request": self.request}
         )
