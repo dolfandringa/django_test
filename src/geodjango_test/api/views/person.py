@@ -1,8 +1,7 @@
 """Person api"""
 from django_property_filter import PropertyCharFilter, PropertyFilterSet
-from rest_framework import viewsets
+from rest_framework import serializers, viewsets
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_json_api import serializers
 
 from geodjango_test.models import Person
 
@@ -21,14 +20,13 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PersonFilterSet(PropertyFilterSet):
+    first_name = PropertyCharFilter(field_name="first_name", lookup_expr="contains")
+    last_name = PropertyCharFilter(field_name="last_name", lookup_expr="contains")
+    email = PropertyCharFilter(field_name="email", lookup_expr="contains")
+
     class Meta:
         model = Person
-        exclude = ["_email", "_firstname", "_lastname"]
-        property_fields = [
-            ("first_name", PropertyCharFilter, ["contains"]),
-            ("last_name", PropertyCharFilter, ["contains"]),
-            ("email", PropertyCharFilter, ["contains"]),
-        ]
+        fields = ["first_name", "last_name", "email"]
 
 
 class PersonViewSet(viewsets.ModelViewSet):
