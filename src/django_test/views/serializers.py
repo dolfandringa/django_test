@@ -28,9 +28,9 @@ class LoginSerializer(serializers.Serializer):
             user_model = get_user_model()
             try:
                 user = user_model.objects.get(email=email)
-            except user_model.DoesNotExist:
+            except user_model.DoesNotExist as exc:
                 msg = "Access denied: wrong email or password."
-                raise serializers.ValidationError(msg, code="authorization")
+                raise serializers.ValidationError(msg, code="authorization") from exc
             # Try to authenticate the user using Django auth framework.
             if not user or not user.check_password(password):
                 msg = "Access denied: wrong email or password."
